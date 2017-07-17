@@ -62,7 +62,7 @@ class UserComponentTest extends AsyncFunSuite with UserComponent with H2DBCompon
   }
 
   test("Fetch all users") {
-    val result = getAllUser
+    val result = getAllUsers
     result.map { actualUserList =>
       assert(actualUserList.length === 2)
     }

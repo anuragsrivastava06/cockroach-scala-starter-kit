@@ -3,7 +3,7 @@ package com.knoldus.DAO.user.mappings
 import com.knoldus.DAO.db.DBComponent
 import slick.lifted.ProvenShape
 
-case class User(id: String, name: String, email: String)
+case class User(id: String = "", name: String, email: String)
 
 trait UserMapping {
   this: DBComponent =>

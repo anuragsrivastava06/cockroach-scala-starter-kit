@@ -14,7 +14,7 @@ trait UserComponent extends UserMapping {
   import driver.api._
 
   /**
-    * This method is used for insert user into database
+    * Inserts user into database
     *
     * @param user
     * @return
@@ -34,7 +34,7 @@ trait UserComponent extends UserMapping {
   }
 
   /**
-    * This method is used for fetching user record with the help of userId
+    * Fetches user record with the help of userId
     *
     * @param userId
     * @return Option[User]
@@ -44,11 +44,11 @@ trait UserComponent extends UserMapping {
   }
 
   /**
-    * This method is used for fetching All user from DB
+    * Fetches All user from DB
     *
     * @return
     */
-  def getAllUser: Future[List[User]] = {
+  def getAllUsers: Future[List[User]] = {
     db.run(userInfo.to[List].result)
   }
 
