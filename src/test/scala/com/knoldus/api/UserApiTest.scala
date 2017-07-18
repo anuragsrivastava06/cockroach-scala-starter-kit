@@ -24,7 +24,7 @@ class UserApiTest extends AsyncFunSuite with ScalatestRouteTest with MockitoSuga
   test("api default welcome route") {
     Get("/") ~> welcomeRoute ~> check {
       status shouldBe StatusCodes.OK
-      responseAs[String] shouldBe "Cockroach Db starterkit with Akka http"
+      responseAs[String] shouldBe "Cockroach Db starter kit with Akka http"
     }
   }
 

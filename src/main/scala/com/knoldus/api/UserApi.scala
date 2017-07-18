@@ -20,7 +20,7 @@ class UserApi@Inject()(userService: UserService) extends JsonHelper {
     */
   def welcomeRoute: Route = path("") {
     get {
-      complete("Cockroach Db starterkit with Akka http")
+      complete("Cockroach Db starter kit with Akka http")
     }
   }
 
