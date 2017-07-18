@@ -36,7 +36,7 @@ class UserApiTest extends AsyncFunSuite with ScalatestRouteTest with MockitoSuga
     when(mockedUserService.isUserIdExists("testId1")).thenReturn(Future.successful(true))
     when(mockedUserService.insert(user)).thenReturn(Future.successful(1))
     Post("/user/add", user.toJson) ~> insertUser ~> check {
-      rejection shouldBe ValidationRejection("User with testId1 already exists")
+      rejection shouldBe ValidationRejection("User with id 'testId1' already exists")
     }
   }
 

@@ -32,7 +32,7 @@ class UserApi@Inject()(userService: UserService) extends JsonHelper {
   def insertUser: Route = path("user" / "add") {
     (post & entity(as[User])) { user =>
       onComplete(userService.isUserIdExists(user.id)) {
-        case Success(res) => validate(!res, s"User with ${user.id} already exists") {
+        case Success(res) => validate(!res, s"User with id '${user.id}' already exists") {
           onComplete(userService.insert(user)) {
             case Success(result) => complete("User added successfully")
             case Failure(ex) => complete(HttpResponse(StatusCodes.InternalServerError, entity = ex.getMessage))
