@@ -21,6 +21,13 @@ class UserApiTest extends AsyncFunSuite with ScalatestRouteTest with MockitoSuga
   val userApi = new UserApi(mockedUserService)
   import userApi._
 
+  test("api default welcome route") {
+    Get("/") ~> welcomeRoute ~> check {
+      status shouldBe StatusCodes.OK
+      responseAs[String] shouldBe "Cockroach Db starterkit with Akka http"
+    }
+  }
+
   test("api to insert user data successfully") {
     val user = User("testId1", "test user", "testuser@gmail.com")
     when(mockedUserService.isUserIdExists("testId1")).thenReturn(Future.successful(false))
