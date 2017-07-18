@@ -53,13 +53,13 @@ trait UserComponent extends UserMapping {
   }
 
   /**
-    * Checks if user with employee id exists
+    * Checks if user with user id exists
     *
-    * @param employeeId
+    * @param userId
     * @return
     */
-  def isEmployeeIdExists(employeeId: String): Future[Boolean] = {
-    val query = userInfo.filter(user => user.id === employeeId).exists
+  def isUserIdExists(userId: String): Future[Boolean] = {
+    val query = userInfo.filter(user => user.id === userId).exists
     db.run(query.result)
   }
 }

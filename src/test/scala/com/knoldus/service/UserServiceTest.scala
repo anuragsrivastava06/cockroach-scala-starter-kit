@@ -88,20 +88,20 @@ class UserServiceTest extends AsyncFunSuite with MockitoSugar with Matchers {
   }
 
   test("check user by user id exists successfully") {
-    when(mockedUserComponent.isEmployeeIdExists("testId1")).thenReturn(Future.successful(true))
-    val result = userService.isEmployeeIdExists("testId1")
+    when(mockedUserComponent.isUserIdExists("testId1")).thenReturn(Future.successful(true))
+    val result = userService.isUserIdExists("testId1")
     result.map(isUserExist => isUserExist shouldBe true)
   }
 
   test("check user by user id exists, case false") {
-    when(mockedUserComponent.isEmployeeIdExists("testId1")).thenReturn(Future.successful(false))
-    val result = userService.isEmployeeIdExists("testId1")
+    when(mockedUserComponent.isUserIdExists("testId1")).thenReturn(Future.successful(false))
+    val result = userService.isUserIdExists("testId1")
     result.map(isUserExist => isUserExist shouldBe false)
   }
 
   test("check user by user id exists: exception case") {
-    when(mockedUserComponent.isEmployeeIdExists("testId1")).thenReturn(Future.failed(new RuntimeException("exception")))
-    val result = userService.isEmployeeIdExists("testId1")
+    when(mockedUserComponent.isUserIdExists("testId1")).thenReturn(Future.failed(new RuntimeException("exception")))
+    val result = userService.isUserIdExists("testId1")
     result.failed.map(fail => fail.getMessage shouldBe "exception")
   }
 

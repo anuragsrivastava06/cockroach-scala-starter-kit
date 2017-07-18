@@ -13,10 +13,7 @@ class UserService @Inject()(userComponent: UserComponent){
     *
     * @param user
     */
-  def insert(user: User) = {
-  val id = Random.alphanumeric.toString
-    userComponent.insert(user.copy(id = id))
-  }
+  def insert(user: User) = userComponent.insert(user)
 
   /**
     * Get user by user id
@@ -42,11 +39,11 @@ class UserService @Inject()(userComponent: UserComponent){
   def getAllUsers() = userComponent.getAllUsers
 
   /**
-    * Check whether user exists with employee id
+    * Check whether user exists with user id
     *
-    * @param employeeId
+    * @param userId
     * @return
     */
-  def isEmployeeIdExists(employeeId: String) = userComponent.isEmployeeIdExists(employeeId)
+  def isUserIdExists(userId: String) = userComponent.isUserIdExists(userId)
 
 }
