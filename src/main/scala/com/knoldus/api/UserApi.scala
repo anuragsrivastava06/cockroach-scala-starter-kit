@@ -8,7 +8,6 @@ import com.knoldus.DAO.user.mappings.User
 import com.knoldus.service.UserService
 import com.knoldus.util.JsonHelper
 
-import scala.concurrent.ExecutionContext.Implicits.global
 import scala.util.{Failure, Success}
 
 class UserApi@Inject()(userService: UserService) extends JsonHelper {
@@ -48,7 +47,7 @@ class UserApi@Inject()(userService: UserService) extends JsonHelper {
     *
     * @return
     */
-  def getUserByUserId = path("user" / "get") {
+  def getUserByUserId: Route = path("user" / "get") {
     get {
       parameters("id") { id =>
         onComplete(userService.getUserByUserId(id)) {
@@ -68,7 +67,7 @@ class UserApi@Inject()(userService: UserService) extends JsonHelper {
     *
     * @return
     */
-  def getUserByEmail = path("user" / "get") {
+  def getUserByEmail: Route = path("user" / "get") {
     get {
       parameters("email") { email =>
         onComplete(userService.getUserByEmail(email)) {
@@ -88,7 +87,7 @@ class UserApi@Inject()(userService: UserService) extends JsonHelper {
     *
     * @return
     */
-  def getAllUsers = path("user" / "get" / "all") {
+  def getAllUsers: Route = path("user" / "get" / "all") {
     get {
       onComplete(userService.getAllUsers()) {
         case Success(users) => complete(users)
@@ -103,7 +102,7 @@ class UserApi@Inject()(userService: UserService) extends JsonHelper {
     *
     * @return
     */
-  def isUserIdExists = path("user" / "exists") {
+  def isUserIdExists: Route = path("user" / "exists") {
     get {
       parameters("userId") { userId =>
         onComplete(userService.isUserIdExists(userId)) {

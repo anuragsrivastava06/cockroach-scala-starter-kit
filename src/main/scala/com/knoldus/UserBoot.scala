@@ -15,7 +15,11 @@ object UserBoot extends App {
   val userApi = injector.instance[UserApi]
 
   implicit val actor = ActorSystem("user-api")
+
   implicit val actorMaterializer = ActorMaterializer()
 
-  Http().bindAndHandle(userApi.routes, "localhost", 9999).map(service => println(s"Application up and running at ${service.localAddress}"))
+  val host = "localhost"
+  val port = 9999
+
+  Http().bindAndHandle(userApi.routes, host, port)
 }

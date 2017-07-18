@@ -1,6 +1,7 @@
 package com.knoldus.api
 
 import akka.http.scaladsl.model.StatusCodes
+import akka.http.scaladsl.server.ValidationRejection
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import com.knoldus.DAO.user.mappings.User
 import com.knoldus.service.UserService
@@ -9,8 +10,6 @@ import org.mockito.Mockito._
 import org.scalatest.mockito.MockitoSugar
 import org.scalatest.{AsyncFunSuite, Matchers}
 import spray.json._
-import DefaultJsonProtocol._
-import akka.http.scaladsl.server.{AuthorizationFailedRejection, ValidationRejection}
 
 import scala.concurrent.Future
 
@@ -37,6 +36,17 @@ class UserApiTest extends AsyncFunSuite with ScalatestRouteTest with MockitoSuga
       responseAs[String] shouldBe "User added successfully"
     }
   }
+
+  test("api to insert user data, when service to check user id fails") {
+    val user = User("testId1", "test user", "testuser@gmail.com")
+    when(mockedUserService.isUserIdExists("testId1")).thenReturn(Future.failed(new RuntimeException("Exception while fetching user")))
+    when(mockedUserService.insert(user)).thenReturn(Future.successful(1))
+    Post("/user/add", user.toJson) ~> insertUser ~> check {
+      status shouldBe StatusCodes.InternalServerError
+      responseAs[String] shouldBe "Exception while fetching user"
+    }
+  }
+
 
   test("api to insert user data, when user id already exists") {
     val user = User("testId1", "test user", "testuser@gmail.com")

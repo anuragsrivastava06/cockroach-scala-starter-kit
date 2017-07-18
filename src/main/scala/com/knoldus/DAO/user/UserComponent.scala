@@ -1,9 +1,10 @@
 package com.knoldus.DAO.user
 
 
+import com.google.inject.ImplementedBy
 import com.knoldus.DAO.db.{DBComponent, PostgresDbComponent}
 import com.knoldus.DAO.user.mappings.{User, UserMapping}
-import com.google.inject.ImplementedBy
+
 import scala.concurrent.Future
 
 @ImplementedBy(classOf[UserPostgresComponent])

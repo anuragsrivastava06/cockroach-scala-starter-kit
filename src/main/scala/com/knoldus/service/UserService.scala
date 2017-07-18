@@ -4,7 +4,7 @@ import com.google.inject.Inject
 import com.knoldus.DAO.user.UserComponent
 import com.knoldus.DAO.user.mappings.User
 
-import scala.util.Random
+import scala.concurrent.Future
 
 class UserService @Inject()(userComponent: UserComponent){
 
@@ -13,7 +13,7 @@ class UserService @Inject()(userComponent: UserComponent){
     *
     * @param user
     */
-  def insert(user: User) = userComponent.insert(user)
+  def insert(user: User): Future[Int] = userComponent.insert(user)
 
   /**
     * Get user by user id
@@ -21,7 +21,7 @@ class UserService @Inject()(userComponent: UserComponent){
     * @param id
     * @return
     */
-  def getUserByUserId(id: String) = userComponent.getUserByUserId(id)
+  def getUserByUserId(id: String): Future[Option[User]] = userComponent.getUserByUserId(id)
 
   /**
     * Get user by email id
@@ -29,14 +29,14 @@ class UserService @Inject()(userComponent: UserComponent){
     * @param email
     * @return
     */
-  def getUserByEmail(email: String) = userComponent.getUserByEmail(email)
+  def getUserByEmail(email: String): Future[Option[User]] = userComponent.getUserByEmail(email)
 
   /**
     * Get list of all users
     *
     * @return
     */
-  def getAllUsers() = userComponent.getAllUsers
+  def getAllUsers(): Future[List[User]] = userComponent.getAllUsers
 
   /**
     * Check whether user exists with user id
@@ -44,6 +44,6 @@ class UserService @Inject()(userComponent: UserComponent){
     * @param userId
     * @return
     */
-  def isUserIdExists(userId: String) = userComponent.isUserIdExists(userId)
+  def isUserIdExists(userId: String): Future[Boolean] = userComponent.isUserIdExists(userId)
 
 }
